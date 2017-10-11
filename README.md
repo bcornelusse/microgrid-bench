@@ -14,12 +14,12 @@ where "{platform}" must matches your OS. Checkout [this reference](https://conda
 
 For Windows:
 ```
-activate micrgrid # windows
+activate microgrid # windows
 ```
 
 For OSX and linux,
 ```
-source activate micrgrid
+source activate microgrid
 ```
 
 4. Check if installation was done properly
