@@ -1,7 +1,7 @@
-Anaconda
-========
+Installation
+============
 
-1. Download and install [Anaconda](https://www.anaconda.com/download/) for Python 2.7 and your specific OS.
+1. We highly recommend to download and install [Anaconda](https://www.anaconda.com/download/) for Python 2.7 and your specific OS.
 2. Create one environement for this assignement
 
 ```
