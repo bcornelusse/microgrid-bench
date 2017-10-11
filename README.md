@@ -5,7 +5,7 @@ Anaconda
 2. Create one environement for this assignement
 
 ```
-conda create --name micrgrid --file conda-{platform}.txt
+conda create --name microgrid --file conda-{platform}.txt
 ```
 
 where "{platform}" must matches your OS. Checkout [this reference](https://conda.io/docs/user-guide/tasks/manage-environments.html) for more information about how to manage Anaconda environments.
