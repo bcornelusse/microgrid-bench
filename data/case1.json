@@ -1,0 +1,40 @@
+{
+  "loads": [
+    {
+      "name": "C1",
+      "capacity": 10.0
+    },
+    {
+      "name": "C2",
+      "capacity": 10.0
+    },
+    {
+      "name": "C3",
+      "capacity": 10.0
+    }
+
+
+  ],
+  "generators": [
+    {
+      "name": "EPV",
+      "capacity": 10.0,
+      "steerable": false,
+      "min_stable_generation": 0.0
+    }
+  ],
+  "storages": [
+    {
+      "name": "BSS_1",
+      "capacity": 12.0,
+      "max_charge_rate": 3.0,
+      "max_discharge_rate": 3.0,
+      "charge_efficiency": 0.99,
+      "discharge_efficiency": 0.98
+    }
+  ],
+  "base_purchase_price": 0.1,
+  "price_margin":0.06,
+  "peak_price": 0.48,
+  "period_duration": 1
+}
