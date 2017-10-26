@@ -10,6 +10,7 @@ Subpackages
     microgrid.forecast
     microgrid.history
     microgrid.model
+    microgrid.plot
     microgrid.simulate
 
 Module contents

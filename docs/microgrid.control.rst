@@ -4,22 +4,10 @@ microgrid\.control package
 Submodules
 ----------
 
-microgrid\.control\.abstract\_controller module
------------------------------------------------
+.. toctree::
 
-.. automodule:: microgrid.control.abstract_controller
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-microgrid\.control\.idle\_controller module
--------------------------------------------
-
-.. automodule:: microgrid.control.idle_controller
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   microgrid.control.abstract_controller
+   microgrid.control.idle_controller
 
 Module contents
 ---------------

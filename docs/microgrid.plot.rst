@@ -1,17 +1,17 @@
-microgrid\.forecast package
-===========================
+microgrid\.plot package
+=======================
 
 Submodules
 ----------
 
 .. toctree::
 
-   microgrid.forecast.forecaster
+   microgrid.plot.plot_results
 
 Module contents
 ---------------
 
-.. automodule:: microgrid.forecast
+.. automodule:: microgrid.plot
     :members:
     :undoc-members:
     :show-inheritance:

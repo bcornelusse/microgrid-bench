@@ -52,7 +52,7 @@ Alternatively you can generate the documentation yourself if you have sphinx ins
 ::
 
     cd <to the root of the project>
-    sphinx-apidoc -o docs/ microgrid/ -f
+    sphinx-apidoc -o docs/ microgrid/ -f --separate
     cd docs; make html; cd ..
 
 The html doc is in ``_build/html``

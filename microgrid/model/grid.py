@@ -10,7 +10,7 @@ class Grid:
         devices, and additional information such as prices.
         The period duration of the simulation is also stored at this level, although
         it is more part of the configuration of the simulation.
-        :param data:
+        :param data: A json type dictionnary containing a description of the microgrid.
         """
         self.loads = [Load(l["name"], l["capacity"]) for l in data["loads"]]
         self.generators = [Generator(g["name"], g) for g in data["generators"]]
@@ -58,8 +58,18 @@ class Grid:
         self._price_margin = float(value)
 
     def purchase_price(self, energy_prices):
+        """
+
+        :param energy_prices: A list of energy prices (i.e. a time series), in EUR/MWh
+        :return: The actual purchase price taking into account all components, in EUR/kWh
+        """
         return [self.base_purchase_price + p * (1 + self.price_margin) * 1e-3 for p in
                 energy_prices]
 
     def sale_price(self, energy_prices):
+        """
+
+        :param energy_prices: A list of energy prices (i.e. a time series), in EUR/MWh
+        :return: The actual sale price taking into account all components, in EUR/kWh
+        """
         return [p * (1 - self.price_margin) * 1e-3 for p in energy_prices]

@@ -10,6 +10,11 @@ FONT_SIZE = 12
 
 class Plotter:
     def __init__(self, results, case):
+        """
+
+        :param results: A json type dictionary containing results
+        :param case: Name of the case, as a string
+        """
         self.results = results
         self.case = case
 

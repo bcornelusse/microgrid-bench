@@ -1,6 +1,5 @@
 import json
-
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from microgrid.control import IdleController
 from microgrid.forecast import Forecaster
@@ -60,6 +59,6 @@ if STORE_ACTIONS:
 with open(RESULTS_FILE, 'w') as jsonFile:
     json.dump(results, jsonFile)
 
-from plot_results import Plotter
+from microgrid.plot import Plotter
 plotter = Plotter(results, 'results/%s' % CASE)
 plotter.plot_results()

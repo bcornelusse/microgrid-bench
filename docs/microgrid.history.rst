@@ -4,14 +4,9 @@ microgrid\.history package
 Submodules
 ----------
 
-microgrid\.history\.database module
------------------------------------
+.. toctree::
 
-.. automodule:: microgrid.history.database
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   microgrid.history.database
 
 Module contents
 ---------------

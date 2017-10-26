@@ -1,3 +1,8 @@
+"""
+The model package defines all classes that are used to represent a microgrid and its devices.
+It mainly contains data and a few useful methods.
+"""
+
 from .grid import Grid
 from .device import Device
 from .generator import Generator

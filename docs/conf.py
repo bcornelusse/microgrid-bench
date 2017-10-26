@@ -18,6 +18,8 @@ except ImportError:
 sys.modules['scipy'] = Mock()
 sys.modules['pandas'] = Mock()
 sys.modules['numpy'] = Mock()
+sys.modules['numpy.ma'] = Mock()
+sys.modules['matplotlib.pyplot'] = Mock()
 sys.modules['sklearn'] = Mock()
 sys.modules['sklearn.ensemble'] = Mock()
 
