@@ -16,6 +16,13 @@ class Forecaster:
         self.database = database
 
     def forecast(self, column, dt_from, dt_to):
+        """
+
+        :param column: Name of the series to forecast
+        :param dt_from: date_time object specifying the start of the prediction horizon
+        :param dt_to: date_time object specifying the end of the prediction horizon
+        :return: the forecast as a numpy array. The length of the array is equal to the number of hours between dt_from and dt_to, rounded down.
+        """
         dt_from = dt_from.replace(minute=0, second=0, microsecond=0)
         dt_to = dt_to.replace(minute=0, second=0, microsecond=0)
 

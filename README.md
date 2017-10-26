@@ -27,3 +27,13 @@ source activate microgrid
 ```
 python main.py
 ```
+
+
+Generate the doc
+================
+
+```
+cd <to the root of the project>
+sphinx-apidoc -o doc/ microgrid/ -f  --implicit-namespaces
+cd doc; make html; cd ..
+```
