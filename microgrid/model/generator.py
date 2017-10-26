@@ -2,7 +2,13 @@ from microgrid.model.device import Device
 
 
 class Generator(Device):
+
     def __init__(self, name, params):
+        """
+        
+        :param name: Cf. parent class
+        :param params: dictionary of params, must include a capacity value , a steerable flag, and a min_stable_generation value
+        """
 
         super(Generator, self).__init__(name)
 

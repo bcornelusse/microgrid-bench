@@ -3,6 +3,11 @@ from microgrid.model.device import Device
 
 class Storage(Device):
     def __init__(self, name, params):
+        """
+
+        :param name: Cf. parent class
+        :param params: dictionary of params, must include a capacity value , a max_charge_rate value, a max_max_discharge_rate value, a charge_charge_efficiency value and a discharge_charge_efficiency value.
+        """
 
         super(Storage, self).__init__(name)
 

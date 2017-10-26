@@ -5,12 +5,19 @@ from .generator import Generator
 
 class Grid:
     def __init__(self, data):
+        """
+        A microgrid is represented by its devices which are either loads, generators or storage
+        devices, and additional information such as prices.
+        The period duration of the simulation is also stored at this level, although
+        it is more part of the configuration of the simulation.
+        :param data:
+        """
         self.loads = [Load(l["name"], l["capacity"]) for l in data["loads"]]
         self.generators = [Generator(g["name"], g) for g in data["generators"]]
         self.storages = [Storage(s["name"], s) for s in data["storages"]]
 
         self.base_purchase_price = data["base_purchase_price"]
-        self.period_duration = data["period_duration"]
+        self.period_duration = data["period_duration"] #TODO period_duration to a config file?
         self.peak_price = data["peak_price"]
         self.price_margin = data["price_margin"]
 

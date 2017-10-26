@@ -2,30 +2,31 @@ Installation
 ============
 
 1. Download the code from `Github <https://github.com/bcornelusse/microgrid-bench>`__
-2. We highly recommend to download and install
-   `Anaconda <https://www.anaconda.com/download/>`__ for Python 2.7 and
-   your specific OS.
-3. Create one environement for this project
+2. We highly recommend to use an Anaconda distribution
 
-::
+ a. download and install `Anaconda <https://www.anaconda.com/download/>`__ for Python 2.7 and your specific OS.
+
+ b. Create one environement for this project
+
+ ::
 
     conda create --name microgrid --file conda-{platform}.txt
 
-where "{platform}" must matche your OS. Checkout `this
-reference <https://conda.io/docs/user-guide/tasks/manage-environments.html>`__
-for more information about how to manage Anaconda environments.
+ where "{platform}" must matche your OS. Checkout `this
+ reference <https://conda.io/docs/user-guide/tasks/manage-environments.html>`__
+ for more information about how to manage Anaconda environments.
 
-4. Activate the environment.
+ c. Activate the environment
 
-For Windows:
+ For Windows:
 
-::
+ ::
 
     activate microgrid
 
-For OSX and Linux,
+ For OSX and Linux,
 
-::
+ ::
 
     source activate microgrid
 

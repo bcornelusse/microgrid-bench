@@ -17,7 +17,7 @@ TOL_IS_ZERO = 1e-4
 class Simulator:
     def __init__(self, grid, controller, database):
         """
-        :param grid: A description of the grid
+        :param grid: A description of the grid as a Grid object
         :param controller: tool that decides, based on a forecast, a grid state and a model, which decisions to apply to the system now, until the next reoptimization
         :param database: (true) evolution of the exogeneous quantities over the simulation period
         """
@@ -28,10 +28,12 @@ class Simulator:
 
     def run(self, start_date, end_date, decision_horizon=1, optim_horizon=12):
         """
+        Run the simulation.
 
         :param start_date: start period of the simulation
         :param end_date: end period of the simulation
         :param decision_horizon: resolution of the simulation, in hours
+        :param optim_horizon: parameter passed to the controller in case the latter computes decisions over an optimization horizon longer than 1 period.
         :return:
         """
 

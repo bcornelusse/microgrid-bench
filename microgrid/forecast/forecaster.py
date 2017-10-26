@@ -8,20 +8,28 @@ class Forecaster:
     _dt_lower_bound_ = datetime(2015, 1, 1, 0, 0, 0)
     _dt_upper_bound_ = datetime(2015, 6, 30, 0, 0, 0)
 
-    _predicted_quantities_ = ['Price', 'EPV', 'C1', 'C2', 'C3']
+    _predicted_quantities_ = ['Price', 'EPV', 'C1', 'C2', 'C3'] # TODO generalize
 
     _ls_input_ = ['Year', 'Month', 'Day', 'Hour', 'Minutes', 'Seconds', 'IsoDayOfWeek', 'IsoWeekNumber']
 
     def __init__(self, database):
+        """
+        A Forecaster object allows to generate forecast of any of the uncertain quantities referenced in the database.
+
+        :param database: A :class:`Database` object used for training the forecaster
+        """
         self.database = database
 
     def forecast(self, column, dt_from, dt_to):
         """
+        Forecast an uncertain quantity over a specified time range with a hourly resolution.
+        Each time a forecast is asked, a new forecaster is trained using all previous values
+        of the quantity until dt_from.
 
         :param column: Name of the series to forecast
-        :param dt_from: date_time object specifying the start of the prediction horizon
-        :param dt_to: date_time object specifying the end of the prediction horizon
-        :return: the forecast as a numpy array. The length of the array is equal to the number of hours between dt_from and dt_to, rounded down.
+        :param dt_from: A date_time object specifying the start of the prediction horizon
+        :param dt_to: A date_time object specifying the end of the prediction horizon
+        :return: The forecast as a numpy array. The length of the array is equal to the number of hours between dt_from and dt_to, rounded down
         """
         dt_from = dt_from.replace(minute=0, second=0, microsecond=0)
         dt_to = dt_to.replace(minute=0, second=0, microsecond=0)
