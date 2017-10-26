@@ -1,0 +1,177 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>microgrid.control package &#8212; Microgrid-bench 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="microgrid.forecast package" href="microgrid.forecast.html" />
+    <link rel="prev" title="microgrid package" href="microgrid.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="microgrid-control-package">
+<h1>microgrid.control package<a class="headerlink" href="#microgrid-control-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-microgrid.control.abstract_controller">
+<span id="microgrid-control-abstract-controller-module"></span><h2>microgrid.control.abstract_controller module<a class="headerlink" href="#module-microgrid.control.abstract_controller" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.control.abstract_controller.AbstractController">
+<em class="property">class </em><code class="descclassname">microgrid.control.abstract_controller.</code><code class="descname">AbstractController</code><span class="sig-paren">(</span><em>grid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/control/abstract_controller.html#AbstractController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.control.abstract_controller.AbstractController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="microgrid.control.abstract_controller.AbstractController.compute_actions">
+<code class="descname">compute_actions</code><span class="sig-paren">(</span><em>start_date</em>, <em>end_date</em>, <em>grid_state</em>, <em>horizon</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/control/abstract_controller.html#AbstractController.compute_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.control.abstract_controller.AbstractController.compute_actions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_date</strong> – Start period for which actions is requested</li>
+<li><strong>end_date</strong> – End period for which actions is requested</li>
+<li><strong>grid_state</strong> – State of the grid at start_period</li>
+<li><strong>horizon</strong> – optimization horizon</li>
+<li><strong>debug</strong> – flag to (de)active debug information</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">grid actions to be applied to the microgrid, as a GridAction object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.control.idle_controller">
+<span id="microgrid-control-idle-controller-module"></span><h2>microgrid.control.idle_controller module<a class="headerlink" href="#module-microgrid.control.idle_controller" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.control.idle_controller.IdleController">
+<em class="property">class </em><code class="descclassname">microgrid.control.idle_controller.</code><code class="descname">IdleController</code><span class="sig-paren">(</span><em>grid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/control/idle_controller.html#IdleController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.control.idle_controller.IdleController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.control.abstract_controller.AbstractController" title="microgrid.control.abstract_controller.AbstractController"><code class="xref py py-class docutils literal"><span class="pre">microgrid.control.abstract_controller.AbstractController</span></code></a></p>
+<dl class="method">
+<dt id="microgrid.control.idle_controller.IdleController.compute_actions">
+<code class="descname">compute_actions</code><span class="sig-paren">(</span><em>start_date</em>, <em>end_date</em>, <em>grid_state</em>, <em>horizon</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/control/idle_controller.html#IdleController.compute_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.control.idle_controller.IdleController.compute_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.control">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-microgrid.control" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.control.IdleController">
+<em class="property">class </em><code class="descclassname">microgrid.control.</code><code class="descname">IdleController</code><span class="sig-paren">(</span><em>grid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/control/idle_controller.html#IdleController"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.control.IdleController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.control.abstract_controller.AbstractController" title="microgrid.control.abstract_controller.AbstractController"><code class="xref py py-class docutils literal"><span class="pre">microgrid.control.abstract_controller.AbstractController</span></code></a></p>
+<dl class="method">
+<dt id="microgrid.control.IdleController.compute_actions">
+<code class="descname">compute_actions</code><span class="sig-paren">(</span><em>start_date</em>, <em>end_date</em>, <em>grid_state</em>, <em>horizon</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/control/idle_controller.html#IdleController.compute_actions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.control.IdleController.compute_actions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">microgrid.control package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-microgrid.control.abstract_controller">microgrid.control.abstract_controller module</a></li>
+<li><a class="reference internal" href="#module-microgrid.control.idle_controller">microgrid.control.idle_controller module</a></li>
+<li><a class="reference internal" href="#module-microgrid.control">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">microgrid</a><ul>
+  <li><a href="microgrid.html">microgrid package</a><ul>
+      <li>Previous: <a href="microgrid.html" title="previous chapter">microgrid package</a></li>
+      <li>Next: <a href="microgrid.forecast.html" title="next chapter">microgrid.forecast package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/microgrid.control.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Bertrand Cornélusse.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/microgrid.control.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

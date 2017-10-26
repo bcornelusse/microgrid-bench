@@ -1,0 +1,256 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>microgrid.model package &#8212; Microgrid-bench 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="microgrid.simulate package" href="microgrid.simulate.html" />
+    <link rel="prev" title="microgrid.history package" href="microgrid.history.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="microgrid-model-package">
+<h1>microgrid.model package<a class="headerlink" href="#microgrid-model-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-microgrid.model.device">
+<span id="microgrid-model-device-module"></span><h2>microgrid.model.device module<a class="headerlink" href="#module-microgrid.model.device" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.model.device.Device">
+<em class="property">class </em><code class="descclassname">microgrid.model.device.</code><code class="descname">Device</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/device.html#Device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.device.Device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.model.generator">
+<span id="microgrid-model-generator-module"></span><h2>microgrid.model.generator module<a class="headerlink" href="#module-microgrid.model.generator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.model.generator.Generator">
+<em class="property">class </em><code class="descclassname">microgrid.model.generator.</code><code class="descname">Generator</code><span class="sig-paren">(</span><em>name</em>, <em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/generator.html#Generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.generator.Generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.model.device.Device" title="microgrid.model.device.Device"><code class="xref py py-class docutils literal"><span class="pre">microgrid.model.device.Device</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.model.grid">
+<span id="microgrid-model-grid-module"></span><h2>microgrid.model.grid module<a class="headerlink" href="#module-microgrid.model.grid" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.model.grid.Grid">
+<em class="property">class </em><code class="descclassname">microgrid.model.grid.</code><code class="descname">Grid</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/grid.html#Grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.grid.Grid" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="microgrid.model.grid.Grid.base_purchase_price">
+<code class="descname">base_purchase_price</code><a class="headerlink" href="#microgrid.model.grid.Grid.base_purchase_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="microgrid.model.grid.Grid.peak_price">
+<code class="descname">peak_price</code><a class="headerlink" href="#microgrid.model.grid.Grid.peak_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="microgrid.model.grid.Grid.period_duration">
+<code class="descname">period_duration</code><a class="headerlink" href="#microgrid.model.grid.Grid.period_duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="microgrid.model.grid.Grid.price_margin">
+<code class="descname">price_margin</code><a class="headerlink" href="#microgrid.model.grid.Grid.price_margin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="microgrid.model.grid.Grid.purchase_price">
+<code class="descname">purchase_price</code><span class="sig-paren">(</span><em>energy_prices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/grid.html#Grid.purchase_price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.grid.Grid.purchase_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="microgrid.model.grid.Grid.sale_price">
+<code class="descname">sale_price</code><span class="sig-paren">(</span><em>energy_prices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/grid.html#Grid.sale_price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.grid.Grid.sale_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.model.load">
+<span id="microgrid-model-load-module"></span><h2>microgrid.model.load module<a class="headerlink" href="#module-microgrid.model.load" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.model.load.Load">
+<em class="property">class </em><code class="descclassname">microgrid.model.load.</code><code class="descname">Load</code><span class="sig-paren">(</span><em>name</em>, <em>capacity</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/load.html#Load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.load.Load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.model.device.Device" title="microgrid.model.device.Device"><code class="xref py py-class docutils literal"><span class="pre">microgrid.model.device.Device</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.model.storage">
+<span id="microgrid-model-storage-module"></span><h2>microgrid.model.storage module<a class="headerlink" href="#module-microgrid.model.storage" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.model.storage.Storage">
+<em class="property">class </em><code class="descclassname">microgrid.model.storage.</code><code class="descname">Storage</code><span class="sig-paren">(</span><em>name</em>, <em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/storage.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.storage.Storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.model.device.Device" title="microgrid.model.device.Device"><code class="xref py py-class docutils literal"><span class="pre">microgrid.model.device.Device</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-microgrid.model">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-microgrid.model" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="microgrid.model.Grid">
+<em class="property">class </em><code class="descclassname">microgrid.model.</code><code class="descname">Grid</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/grid.html#Grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Grid" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="microgrid.model.Grid.base_purchase_price">
+<code class="descname">base_purchase_price</code><a class="headerlink" href="#microgrid.model.Grid.base_purchase_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="microgrid.model.Grid.peak_price">
+<code class="descname">peak_price</code><a class="headerlink" href="#microgrid.model.Grid.peak_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="microgrid.model.Grid.period_duration">
+<code class="descname">period_duration</code><a class="headerlink" href="#microgrid.model.Grid.period_duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="microgrid.model.Grid.price_margin">
+<code class="descname">price_margin</code><a class="headerlink" href="#microgrid.model.Grid.price_margin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="microgrid.model.Grid.purchase_price">
+<code class="descname">purchase_price</code><span class="sig-paren">(</span><em>energy_prices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/grid.html#Grid.purchase_price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Grid.purchase_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="microgrid.model.Grid.sale_price">
+<code class="descname">sale_price</code><span class="sig-paren">(</span><em>energy_prices</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/grid.html#Grid.sale_price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Grid.sale_price" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="microgrid.model.Device">
+<em class="property">class </em><code class="descclassname">microgrid.model.</code><code class="descname">Device</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/device.html#Device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="microgrid.model.Generator">
+<em class="property">class </em><code class="descclassname">microgrid.model.</code><code class="descname">Generator</code><span class="sig-paren">(</span><em>name</em>, <em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/generator.html#Generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.model.device.Device" title="microgrid.model.device.Device"><code class="xref py py-class docutils literal"><span class="pre">microgrid.model.device.Device</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="microgrid.model.Load">
+<em class="property">class </em><code class="descclassname">microgrid.model.</code><code class="descname">Load</code><span class="sig-paren">(</span><em>name</em>, <em>capacity</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/load.html#Load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.model.device.Device" title="microgrid.model.device.Device"><code class="xref py py-class docutils literal"><span class="pre">microgrid.model.device.Device</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="microgrid.model.Storage">
+<em class="property">class </em><code class="descclassname">microgrid.model.</code><code class="descname">Storage</code><span class="sig-paren">(</span><em>name</em>, <em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/microgrid/model/storage.html#Storage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#microgrid.model.Storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#microgrid.model.device.Device" title="microgrid.model.device.Device"><code class="xref py py-class docutils literal"><span class="pre">microgrid.model.device.Device</span></code></a></p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">microgrid.model package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-microgrid.model.device">microgrid.model.device module</a></li>
+<li><a class="reference internal" href="#module-microgrid.model.generator">microgrid.model.generator module</a></li>
+<li><a class="reference internal" href="#module-microgrid.model.grid">microgrid.model.grid module</a></li>
+<li><a class="reference internal" href="#module-microgrid.model.load">microgrid.model.load module</a></li>
+<li><a class="reference internal" href="#module-microgrid.model.storage">microgrid.model.storage module</a></li>
+<li><a class="reference internal" href="#module-microgrid.model">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">microgrid</a><ul>
+  <li><a href="microgrid.html">microgrid package</a><ul>
+      <li>Previous: <a href="microgrid.history.html" title="previous chapter">microgrid.history package</a></li>
+      <li>Next: <a href="microgrid.simulate.html" title="next chapter">microgrid.simulate package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/microgrid.model.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Bertrand Cornélusse.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/microgrid.model.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>microgrid.forecast.forecaster &#8212; Microgrid-bench 1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for microgrid.forecast.forecaster</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">ExtraTreesRegressor</span>
+
+<div class="viewcode-block" id="Forecaster"><a class="viewcode-back" href="../../../microgrid.forecast.html#microgrid.forecast.forecaster.Forecaster">[docs]</a><span class="k">class</span> <span class="nc">Forecaster</span><span class="p">:</span>
+    <span class="n">_ls_lower_bound_</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_dt_lower_bound_</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">_dt_upper_bound_</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">_predicted_quantities_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="s1">&#39;EPV&#39;</span><span class="p">,</span> <span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="s1">&#39;C2&#39;</span><span class="p">,</span> <span class="s1">&#39;C3&#39;</span><span class="p">]</span>
+
+    <span class="n">_ls_input_</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Day&#39;</span><span class="p">,</span> <span class="s1">&#39;Hour&#39;</span><span class="p">,</span> <span class="s1">&#39;Minutes&#39;</span><span class="p">,</span> <span class="s1">&#39;Seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;IsoDayOfWeek&#39;</span><span class="p">,</span> <span class="s1">&#39;IsoWeekNumber&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
+
+<div class="viewcode-block" id="Forecaster.forecast"><a class="viewcode-back" href="../../../microgrid.forecast.html#microgrid.forecast.forecaster.Forecaster.forecast">[docs]</a>    <span class="k">def</span> <span class="nf">forecast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">dt_from</span><span class="p">,</span> <span class="n">dt_to</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param column: Name of the series to forecast</span>
+<span class="sd">        :param dt_from: date_time object specifying the start of the prediction horizon</span>
+<span class="sd">        :param dt_to: date_time object specifying the end of the prediction horizon</span>
+<span class="sd">        :return: the forecast as a numpy array. The length of the array is equal to the number of hours between dt_from and dt_to, rounded down.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dt_from</span> <span class="o">=</span> <span class="n">dt_from</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">dt_to</span> <span class="o">=</span> <span class="n">dt_to</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">column</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_predicted_quantities_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Cannot predict column </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">column</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dt_from</span> <span class="o">&gt;</span> <span class="n">dt_to</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;From date time cannot be after to date time&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dt_from</span> <span class="o">&lt;</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_lower_bound_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;From date cannot be before </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_lower_bound_</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dt_from</span> <span class="o">&gt;</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_upper_bound_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;From date cannot be after </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_upper_bound_</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dt_to</span> <span class="o">&lt;</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_lower_bound_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;To date cannot be before </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_lower_bound_</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dt_to</span> <span class="o">&gt;</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_upper_bound_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;To date cannot be after </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_dt_upper_bound_</span><span class="p">)</span>
+
+        <span class="n">shift_history_size</span> <span class="o">=</span> <span class="mi">48</span>
+        <span class="n">one_hour</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">dt_train_from</span> <span class="o">=</span> <span class="n">Forecaster</span><span class="o">.</span><span class="n">_ls_lower_bound_</span>
+        <span class="n">dt_train_to</span> <span class="o">=</span> <span class="n">dt_from</span> <span class="o">-</span> <span class="n">one_hour</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">data_frame</span>
+        <span class="n">df_x_ls</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">dt_train_from</span> <span class="p">:</span> <span class="n">dt_train_to</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">df_y_ls</span> <span class="o">=</span> <span class="n">df_x_ls</span><span class="p">[</span><span class="n">column</span><span class="p">]</span>
+
+        <span class="c1"># all previous values of the quantity</span>
+        <span class="n">shift_columns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">shift_history_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">col_name</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(t-</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+            <span class="n">df_x_ls</span><span class="p">[</span><span class="n">col_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_y_ls</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+            <span class="n">shift_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col_name</span><span class="p">)</span>
+
+        <span class="n">df_x_ls</span> <span class="o">=</span> <span class="n">df_x_ls</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;any&#39;</span><span class="p">)</span>
+
+        <span class="n">X_train</span> <span class="o">=</span> <span class="n">df_x_ls</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">Forecaster</span><span class="o">.</span><span class="n">_ls_input_</span> <span class="o">+</span> <span class="n">shift_columns</span><span class="p">)</span>
+        <span class="n">y_train</span> <span class="o">=</span> <span class="n">df_x_ls</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span>
+
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">ExtraTreesRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+        <span class="n">dt_test</span> <span class="o">=</span> <span class="n">dt_from</span>
+
+        <span class="n">date_diff</span> <span class="o">=</span> <span class="n">dt_to</span> <span class="o">-</span> <span class="n">dt_from</span>
+        <span class="n">days</span><span class="p">,</span> <span class="n">seconds</span> <span class="o">=</span> <span class="n">date_diff</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">date_diff</span><span class="o">.</span><span class="n">seconds</span>
+        <span class="n">hours</span> <span class="o">=</span> <span class="n">days</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">+</span> <span class="n">seconds</span> <span class="o">//</span> <span class="mi">3600</span>
+
+        <span class="n">X_test_shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="o">-</span><span class="n">shift_history_size</span><span class="p">:])</span>
+
+        <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">hours</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="k">while</span> <span class="n">dt_test</span> <span class="o">&lt;=</span> <span class="n">dt_to</span><span class="p">:</span>
+
+            <span class="n">X_test_dt_infos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">second</span><span class="p">,</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">isoweekday</span><span class="p">(),</span>
+                <span class="n">dt_test</span><span class="o">.</span><span class="n">isocalendar</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">])</span>
+
+            <span class="n">X_test_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_test_dt_infos</span><span class="p">,</span> <span class="n">X_test_shifts</span><span class="p">))</span>
+            <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">X_test_row</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+            <span class="n">y_pred</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+            <span class="n">X_test_shifts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">X_test_shifts</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">X_test_shifts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">h</span><span class="p">]</span>
+
+            <span class="n">h</span> <span class="o">=</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">dt_test</span> <span class="o">=</span> <span class="n">dt_test</span> <span class="o">+</span> <span class="n">one_hour</span>
+
+        <span class="k">return</span> <span class="n">y_pred</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Bertrand Cornélusse.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
