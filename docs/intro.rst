@@ -4,7 +4,7 @@ Purpose of the tool
 
 A microgrid is a small power system connecting devices that consume, generate and store electricity. 
 Usually microgrids are able to operate in islanded mode (off-grid), but they can also be connected to the public grid. 
-We are interested mostly in the latter casen, because it offers many more valorization mechanisms.
+We are interested mostly in the latter case, because it offers many more valorization mechanisms.
 
 Microgrid-bench is a python tool that aims at simulating the techno-economics of a microgrid, 
 and in particular at quantifying the performance of an operational planning controller as a function
@@ -17,7 +17,7 @@ A period can last from one minute to one hour. Hence, fast dynamics of the syste
 
 Microgrid-bench offers the following functionalities:
 
-* To simulate an operationnal planning policy on real data
+* To simulate an operational planning policy on real data
 * Forecasters are automatically generated for all variables that have to be predicted
 * New datasets can be easily integrated (``datasets.csv``)
 * The microgrid topology can be easily configured (See e.g. ``data/case1.json``)
