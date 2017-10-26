@@ -11,6 +11,7 @@ Welcome to Microgrid-bench's documentation!
    :caption: Contents:
 
    intro
+   includeme
    modules
 
 

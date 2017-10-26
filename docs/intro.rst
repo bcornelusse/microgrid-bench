@@ -1,6 +1,6 @@
-===============
-Microgrid-bench
-===============
+===================
+Purpose of the tool
+===================
 
 A microgrid is a small power system connecting devices that consume, generate and store electricity. 
 Usually microgrids are able to operate in islanded mode (off-grid), but they can also be connected to the public grid. 
@@ -23,21 +23,3 @@ Microgrid-bench offers the following functionalities:
 * The microgrid topology can be easily configured (See e.g. ``data/case1.json``)
 * Results are stored in the ``results`` folder (e.g. ``case1_out.json``)
 * Plots are automatically generated and can be regenerated from a set of existing results (e.g. ``case1_out.json``)
-
-============
-Installation
-============
-
-Consult the file readme.md for instructions regarding the required configuration steps.
-
-=======================
-Running the application
-=======================
-
-Run ``python main.py``
-
-Configure the file ``main.py`` if you want to change
-
-* the simulation length
-* the controller
-* etc.
