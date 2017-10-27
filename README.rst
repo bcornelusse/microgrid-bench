@@ -32,18 +32,16 @@ Installation
 
 Running the application
 =======================
-At the root of the project, execute
 
-::
+Please refer to the examples 
 
-    python main.py
+.. toctree::
+  :maxdepth: 2
+  
+  examples
 
-
-Configure the file ``main.py`` if you want to change
-
-* the simulation length
-* the controller
-* etc.
+Documentation
+=============
 
 `Read the doc <http://microgrid-bench.readthedocs.io/en/latest/>`__ for more information.
 

@@ -1,6 +1,9 @@
 import os
+import sys
 import json
 from datetime import datetime
+
+sys.path.insert(0, os.path.abspath('..'))
 
 from microgrid.control import IdleController
 from microgrid.forecast import Forecaster
