@@ -10,7 +10,8 @@ class Grid:
         devices, and additional information such as prices.
         The period duration of the simulation is also stored at this level, although
         it is more part of the configuration of the simulation.
-        :param data: A json type dictionnary containing a description of the microgrid.
+
+        :param data: A json type dictionary containing a description of the microgrid.
         """
         self.loads = [Load(l["name"], l["capacity"]) for l in data["loads"]]
         self.generators = [Generator(g["name"], g) for g in data["generators"]]

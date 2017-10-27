@@ -4,6 +4,11 @@ from microgrid.simulate.gridaction import GridAction
 
 class IdleController(AbstractController):
     def __init__(self, grid):
+        """
+        Controller that takes no action and thus returns zero for all devices and all the horizon.
+
+        :param grid: Cf. base class
+        """
         super(IdleController, self).__init__(grid)
 
     def compute_actions(self, start_date, end_date, grid_state, horizon, debug=False):

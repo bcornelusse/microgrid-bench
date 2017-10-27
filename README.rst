@@ -12,7 +12,7 @@ Installation
 
     conda create --name microgrid --file conda-{platform}.txt
 
- where "{platform}" must matche your OS. Checkout `this
+ where "{platform}" must match your OS. Checkout `this
  reference <https://conda.io/docs/user-guide/tasks/manage-environments.html>`__
  for more information about how to manage Anaconda environments.
 
