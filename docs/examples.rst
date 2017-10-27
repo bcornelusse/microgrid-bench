@@ -5,7 +5,7 @@ Examples
 
 You can find these examples at the |package_root|. 
 
-An example is descibed in a python file and relies on cases stored in the ``data`` folder.
+An example is described in a python file and relies on cases stored in the ``data`` folder.
 
 
 .. |package_root| raw:: html

@@ -31,10 +31,10 @@ Microgrid-bench offers the following functionalities:
 
 * To simulate an operational planning policy on real data
 * Forecasters are automatically generated for all variables that have to be predicted
-* New datasets can be easily integrated (``datasets.csv``)
-* The microgrid topology can be easily configured (See e.g. ``data/case1.json``)
-* Results are stored in the ``results`` folder (e.g. ``case1_out.json``)
-* Plots are automatically generated and can be regenerated from a set of existing results (e.g. ``case1_out.json``)
+* New datasets can be easily integrated 
+* The microgrid topology can be easily configured 
+* Results are stored in the ``results`` folder
+* Plots are automatically generated and can be regenerated from a set of existing results
 
 So far, the following devices are available:
 
