@@ -3,20 +3,25 @@ import pandas as pd
 class Database:
 
     _inputs_ = ['Year', 'Month', 'Day', 'Hour', 'Minutes', 'Seconds', 'IsoDayOfWeek', 'IsoWeekNumber']
-    _output_ = ['Price', 'EPV', 'C1', 'C2', 'C3'] # TODO Should be function of the CSV data
 
-    def __init__(self, path_to_csv):
+    def __init__(self, path_to_csv, grid):
         """
         A Database objects holds the realized data of the microgrid in a pandas dataframe.
 
         The CSV file values are separated by ';' and the first line must contain series names.
-        It must contain a 'DateTime' column with values interpretable as python date time objects.
+        It must contain
+
+        * a 'DateTime' column with values interpretable as python date time objects.
+        * a 'Price' column with values interpretable as floats.
+        * All the non-flexible quantities (load and generation) described in the microgrid configuration
 
         Some new columns are generated from the DateTime column to indicate e.g. whether
         a datetime corresponds to a day of the week or not.
 
         :param path_to_csv: Path to csv containing realized data
+        :param grid: A Grid object describing the configuration of the microgrid
         """
+        self._output_ = ['Price'] + grid.get_non_flexible_device_names()
         self.data_frame = self.read_data(path_to_csv)
 
     def read_data(self, path):
@@ -28,6 +33,8 @@ class Database:
         """
         df = pd.read_csv(path, sep=";", parse_dates=True, index_col='DateTime')
 
+        df_col_names = list(df.columns.values)
+
         df['Year'] = df.index.map(lambda x: x.year)
         df['Month'] = df.index.map(lambda x: x.month)
         df['Day'] = df.index.map(lambda x: x.day)
@@ -36,6 +43,11 @@ class Database:
         df['Seconds'] = df.index.map(lambda x: x.second)
         df['IsoDayOfWeek'] = df.index.map(lambda x: x.isoweekday())
         df['IsoWeekNumber'] = df.index.map(lambda x: x.isocalendar()[1])
+
+        # Assert required columns are defined
+        for tag in self._output_:
+            if tag not in df_col_names:
+                raise ValueError("Column name %s not defined in %s" % (tag, path))
 
         return df
 
@@ -64,4 +76,4 @@ class Database:
         :param time_indexer: A date time
         :return: A list containing the value of all the series at time time_indexer
         """
-        return self.data_frame.loc[time_indexer, Database._output_]
+        return self.data_frame.loc[time_indexer, self._output_]

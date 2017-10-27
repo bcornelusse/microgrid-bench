@@ -18,7 +18,7 @@ class Grid:
         self.storages = [Storage(s["name"], s) for s in data["storages"]]
 
         self.base_purchase_price = data["base_purchase_price"]
-        self.period_duration = data["period_duration"] #TODO period_duration to a config file?
+        self.period_duration = data["period_duration"]  # TODO period_duration to a config file?
         self.peak_price = data["peak_price"]
         self.price_margin = data["price_margin"]
 
@@ -74,3 +74,15 @@ class Grid:
         :return: The actual sale price taking into account all components, in EUR/kWh
         """
         return [p * (1 - self.price_margin) * 1e-3 for p in energy_prices]
+
+    def get_non_flexible_device_names(self):
+        """
+
+        :return: The list of names of all non-flexible loads and generators for which there must be an entry in the data history
+        """
+        names = [d.name for d in self.loads]
+        for d in self.generators:
+            if not d.steerable:
+                names.append(d.name)
+
+        return names

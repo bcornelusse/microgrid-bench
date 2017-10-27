@@ -3,14 +3,14 @@ import numpy as np
 from datetime import datetime, timedelta
 from sklearn.ensemble import ExtraTreesRegressor
 
+
 class Forecaster:
     _ls_lower_bound_ = datetime(2014, 1, 1, 0, 0, 0)
     _dt_lower_bound_ = datetime(2015, 1, 1, 0, 0, 0)
     _dt_upper_bound_ = datetime(2015, 6, 30, 0, 0, 0)
 
-    _predicted_quantities_ = ['Price', 'EPV', 'C1', 'C2', 'C3'] # TODO generalize
-
-    _ls_input_ = ['Year', 'Month', 'Day', 'Hour', 'Minutes', 'Seconds', 'IsoDayOfWeek', 'IsoWeekNumber']
+    _ls_input_ = ['Year', 'Month', 'Day', 'Hour', 'Minutes', 'Seconds', 'IsoDayOfWeek',
+                  'IsoWeekNumber']
 
     def __init__(self, database):
         """
@@ -19,6 +19,7 @@ class Forecaster:
         :param database: A :class:`Database` object used for training the forecaster
         """
         self.database = database
+        self._predicted_quantities_ = database._output_
 
     def forecast(self, column, dt_from, dt_to):
         """
@@ -34,7 +35,7 @@ class Forecaster:
         dt_from = dt_from.replace(minute=0, second=0, microsecond=0)
         dt_to = dt_to.replace(minute=0, second=0, microsecond=0)
 
-        if column not in Forecaster._predicted_quantities_:
+        if column not in self._predicted_quantities_:
             raise ValueError('Cannot predict column %s' % column)
         if dt_from > dt_to:
             raise ValueError("From date time cannot be after to date time")
@@ -54,7 +55,7 @@ class Forecaster:
         dt_train_to = dt_from - one_hour
 
         df = self.database.data_frame
-        df_x_ls = df[dt_train_from : dt_train_to].copy()
+        df_x_ls = df[dt_train_from: dt_train_to].copy()
         df_y_ls = df_x_ls[column]
 
         # all previous values of the quantity
@@ -84,7 +85,6 @@ class Forecaster:
         y_pred = np.zeros((hours + 1))
 
         while dt_test <= dt_to:
-
             X_test_dt_infos = np.array([
                 dt_test.year,
                 dt_test.month,
