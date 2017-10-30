@@ -13,6 +13,13 @@ Subpackages
     microgrid.plot
     microgrid.simulate
 
+Submodules
+----------
+
+.. toctree::
+
+   microgrid.simulation
+
 Module contents
 ---------------
 
